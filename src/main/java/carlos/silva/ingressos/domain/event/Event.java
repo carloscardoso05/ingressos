@@ -4,12 +4,15 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import carlos.silva.ingressos.domain.user.User;
 import carlos.silva.ingressos.domain.value_objects.EventName;
 import carlos.silva.ingressos.domain.value_objects.EventPeriod;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+@EqualsAndHashCode(of = "id")
 public class Event {
     @Getter
     private final EventId id;
@@ -27,7 +30,7 @@ public class Event {
 
         this.id = checkNotNull(id);
         this.name = checkNotNull(name);
-        this.description = checkNotNull(description);
+        this.description = Objects.requireNonNullElse(description, "");
         this.period = checkNotNull(period);
         this.minimalAge = minimalAge;
     }
