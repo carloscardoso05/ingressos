@@ -3,7 +3,7 @@ package carlos.silva.ingressos.persistence.entities;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import carlos.silva.ingressos.value_objects.Cpf;
+import carlos.silva.ingressos.domain.value_objects.CPF;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -21,7 +21,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -36,5 +36,5 @@ public class User {
 
     @Embedded
     @Valid
-    private Cpf cpf;
+    private CPF cpf;
 }
