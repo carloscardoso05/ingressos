@@ -6,14 +6,17 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import org.springframework.data.domain.AbstractAggregateRoot;
+
+import carlos.silva.ingressos.domain.DomainException;
 import carlos.silva.ingressos.domain.user.User;
 import carlos.silva.ingressos.domain.value_objects.EventName;
 import carlos.silva.ingressos.domain.value_objects.EventPeriod;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-@EqualsAndHashCode(of = "id")
-public class Event {
+@EqualsAndHashCode(of = "id", callSuper = false)
+public class Event extends AbstractAggregateRoot<Event> {
     @Getter
     private final EventId id;
     @Getter
@@ -26,7 +29,9 @@ public class Event {
     private Integer minimalAge;
 
     public Event(EventId id, EventName name, String description, EventPeriod period, Integer minimalAge) {
-        checkArgument(minimalAge == null || minimalAge >= 0, "Minimal age must be positive or null");
+        if (minimalAge == null || minimalAge >= 0) {
+            throw new DomainException("Minimal age must be positive or null");
+        }
 
         this.id = checkNotNull(id);
         this.name = checkNotNull(name);

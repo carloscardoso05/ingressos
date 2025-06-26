@@ -1,13 +1,14 @@
 package carlos.silva.ingressos.domain.value_objects;
 
-import com.google.common.base.Strings;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import carlos.silva.ingressos.domain.DomainException;
 
 public record PersonName(String value) {
     public PersonName {
-        if (Strings.isNullOrEmpty(value) || value.isEmpty()) {
-            throw new DomainException("PersonName value must not be null or blank. Actual: '%s'".formatted(value));
+        checkNotNull(value);
+        if (value.isEmpty()) {
+            throw new DomainException("PersonName value must not be blank. Actual: '%s'".formatted(value));
         }
     }
 }

@@ -3,6 +3,7 @@ package carlos.silva.ingressos.domain.value_objects;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import br.com.caelum.stella.validation.CPFValidator;
+import carlos.silva.ingressos.domain.DomainException;
 
 public record CPF(String value) {
 	public CPF(String value) {
@@ -12,7 +13,7 @@ public record CPF(String value) {
 		try {
 			validator.assertValid(value);
 		} catch (Exception e) {
-			throw new IllegalArgumentException("CPF value %s is invalid".formatted(value));
+			throw new DomainException("CPF value %s is invalid".formatted(value));
 		}
 		this.value = value;
 	}
