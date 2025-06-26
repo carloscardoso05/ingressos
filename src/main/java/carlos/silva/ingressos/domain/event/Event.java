@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 import carlos.silva.ingressos.domain.user.User;
 import carlos.silva.ingressos.domain.value_objects.EventName;
+import carlos.silva.ingressos.domain.value_objects.EventPeriod;
 import lombok.Getter;
 
 public class Event {
@@ -17,21 +18,17 @@ public class Event {
     @Getter
     private String description;
     @Getter
-    private LocalDateTime starDateTime;
-    @Getter
-    private LocalDateTime endDateTime;
+    private EventPeriod period;
     @Getter
     private Integer minimalAge;
 
-    public Event(EventId id, EventName name, String description, LocalDateTime starDateTime,
-            LocalDateTime endDateTime, Integer minimalAge) {
+    public Event(EventId id, EventName name, String description, EventPeriod period, Integer minimalAge) {
         checkArgument(minimalAge == null || minimalAge >= 0, "Minimal age must be positive or null");
 
         this.id = checkNotNull(id);
         this.name = checkNotNull(name);
         this.description = checkNotNull(description);
-        this.starDateTime = checkNotNull(starDateTime);
-        this.endDateTime = checkNotNull(endDateTime);
+        this.period = checkNotNull(period);
         this.minimalAge = minimalAge;
     }
 
@@ -40,11 +37,11 @@ public class Event {
     }
 
     public boolean isHappening() {
-        return LocalDateTime.now().isAfter(starDateTime);
+        return LocalDateTime.now().isAfter(period.start());
     }
 
     public boolean hasEnded() {
-        return LocalDateTime.now().isAfter(endDateTime);
+        return LocalDateTime.now().isAfter(period.end());
     }
 
     public boolean areMinorsAllowed() {
