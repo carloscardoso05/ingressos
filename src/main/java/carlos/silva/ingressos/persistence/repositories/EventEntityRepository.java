@@ -9,5 +9,5 @@ import carlos.silva.ingressos.persistence.entities.EventEntity;
 
 @Repository
 public interface EventEntityRepository extends JpaRepository<EventEntity, UUID> {
-    
+
 }

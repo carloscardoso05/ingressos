@@ -16,22 +16,20 @@ public class EventMapper {
 
     public EventEntity fromDomain(@NotNull Event event) {
         return new EventEntity(
-            event.getId().value(),
-            event.getName().value(),
-            event.getDescription(),
-            event.getPeriod().start(),
-            event.getPeriod().end(),
-            event.getMinimalAge()
-        );
+                event.getId().value(),
+                event.getName().value(),
+                event.getDescription(),
+                event.getPeriod().start(),
+                event.getPeriod().end(),
+                event.getMinimalAge());
     }
 
     public Event toDomain(@NotNull EventEntity eventEntity) {
         return new Event(
-            new EventId(eventEntity.getId()),
-            new EventName(eventEntity.getName()),
-            eventEntity.getDescription(),
-            new EventPeriod(eventEntity.getStart(), eventEntity.getEnd()),
-            eventEntity.getMinimalAge()
-        );
+                new EventId(eventEntity.getId()),
+                new EventName(eventEntity.getName()),
+                eventEntity.getDescription(),
+                new EventPeriod(eventEntity.getStart(), eventEntity.getEnd()),
+                eventEntity.getMinimalAge());
     }
 }

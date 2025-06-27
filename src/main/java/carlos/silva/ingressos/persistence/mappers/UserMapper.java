@@ -15,21 +15,19 @@ import jakarta.validation.constraints.NotNull;
 @Validated
 public class UserMapper {
 
-    public UserEntity fromDomain(@NotNull User user) {    
+    public UserEntity fromDomain(@NotNull User user) {
         return new UserEntity(
-            user.getId().value(),
-            user.getName().value(),
-            user.getBirthDate().value(),
-            user.getCpf().value()
-        );
+                user.getId().value(),
+                user.getName().value(),
+                user.getBirthDate().value(),
+                user.getCpf().value());
     }
 
     public User toDomain(@NotNull UserEntity userEntity) {
         return new User(
-            new UserId(userEntity.getId()),
-            new PersonName(userEntity.getName()),
-            new BirthDate(userEntity.getBirthDate()),
-            new CPF(userEntity.getCpf())
-        );
+                new UserId(userEntity.getId()),
+                new PersonName(userEntity.getName()),
+                new BirthDate(userEntity.getBirthDate()),
+                new CPF(userEntity.getCpf()));
     }
 }
