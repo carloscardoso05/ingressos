@@ -10,10 +10,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class UserRepositoryTest {
 
-    private final UserRepository userRepository;
+    private final UserEntityRepository userRepository;
 
     @Autowired
-    public UserRepositoryTest(UserRepository userRepository) {
+    public UserRepositoryTest(UserEntityRepository userRepository) {
         this.userRepository = userRepository;
     }
 

@@ -80,11 +80,11 @@
 			<version>1.18.38</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>1.6.3</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
@@ -113,11 +113,11 @@
 							<artifactId>lombok</artifactId>
 							<version>1.18.38</version>
 						</path>
-						<path>
+						<!-- <path>
 							<groupId>org.mapstruct</groupId>
 							<artifactId>mapstruct-processor</artifactId>
 							<version>1.6.3</version>
-						</path>
+						</path> -->
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>

@@ -1,6 +1,5 @@
 package carlos.silva.ingressos.domain.event;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.time.LocalDateTime;
@@ -29,7 +28,7 @@ public class Event extends AbstractAggregateRoot<Event> {
     private Integer minimalAge;
 
     public Event(EventId id, EventName name, String description, EventPeriod period, Integer minimalAge) {
-        if (minimalAge == null || minimalAge >= 0) {
+        if (minimalAge != null && minimalAge < 0) {
             throw new DomainException("Minimal age must be positive or null");
         }
 

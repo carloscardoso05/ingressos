@@ -3,15 +3,12 @@ package carlos.silva.ingressos.persistence.entities;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import carlos.silva.ingressos.domain.value_objects.CPF;
+import org.hibernate.validator.constraints.br.CPF;
+
+import carlos.silva.ingressos.persistence.entities.base.AuditableEntity;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -21,11 +18,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
+public class UserEntity extends AuditableEntity {
     @Column(nullable = false)
     @NotBlank
     private String name;
@@ -34,7 +27,18 @@ public class UserEntity {
     @NotNull
     private LocalDate birthDate;
 
-    @Embedded
-    @Valid
-    private CPF cpf;
+    @Column(nullable = false, length = 11)
+    @CPF
+    @NotNull
+    private String cpf;
+
+    public UserEntity() {
+    }
+
+    public UserEntity(@NotNull UUID id, @NotBlank String name, @NotNull LocalDate birthDate, @CPF @NotNull String cpf) {
+        this.id = id;
+        this.name = name;
+        this.birthDate = birthDate;
+        this.cpf = cpf;
+    }
 }

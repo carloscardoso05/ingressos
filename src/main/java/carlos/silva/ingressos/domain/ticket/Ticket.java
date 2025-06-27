@@ -25,17 +25,21 @@ public class Ticket extends AbstractAggregateRoot<Ticket> {
     @Getter
     private Instant selledAt;
 
-    public Ticket(TicketId id, int price, EventId eventId) {
+    public Ticket(TicketId id, EventId eventId, int price, UserId userId, Instant selledAt) {
         if (price < 0) {
             throw new DomainException("Ticket price can not be negative");
         }
 
         this.id = checkNotNull(id);
-        this.price = price;
         this.eventId = checkNotNull(eventId);
+        this.price = price;
+        this.userId = userId;
+        this.selledAt = selledAt;
     }
 
     public void sell(UserId userId) {
+        if (!isAvailable())
+            throw new DomainException("Ticket is already selled");
         registerEvent(new TicketSoldEvent(this, Instant.now()));
     }
 
