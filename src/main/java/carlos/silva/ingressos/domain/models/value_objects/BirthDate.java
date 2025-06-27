@@ -1,4 +1,4 @@
-package carlos.silva.ingressos.domain.value_objects;
+package carlos.silva.ingressos.domain.models.value_objects;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

@@ -3,11 +3,11 @@ package carlos.silva.ingressos.persistence.mappers;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
-import carlos.silva.ingressos.domain.user.User;
-import carlos.silva.ingressos.domain.user.UserId;
-import carlos.silva.ingressos.domain.value_objects.BirthDate;
-import carlos.silva.ingressos.domain.value_objects.CPF;
-import carlos.silva.ingressos.domain.value_objects.PersonName;
+import carlos.silva.ingressos.domain.models.user.User;
+import carlos.silva.ingressos.domain.models.user.UserId;
+import carlos.silva.ingressos.domain.models.value_objects.BirthDate;
+import carlos.silva.ingressos.domain.models.value_objects.CPF;
+import carlos.silva.ingressos.domain.models.value_objects.PersonName;
 import carlos.silva.ingressos.persistence.entities.UserEntity;
 import jakarta.validation.constraints.NotNull;
 

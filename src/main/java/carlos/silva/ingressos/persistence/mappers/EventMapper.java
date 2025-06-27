@@ -3,10 +3,10 @@ package carlos.silva.ingressos.persistence.mappers;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
-import carlos.silva.ingressos.domain.event.Event;
-import carlos.silva.ingressos.domain.event.EventId;
-import carlos.silva.ingressos.domain.value_objects.EventName;
-import carlos.silva.ingressos.domain.value_objects.EventPeriod;
+import carlos.silva.ingressos.domain.models.event.Event;
+import carlos.silva.ingressos.domain.models.event.EventId;
+import carlos.silva.ingressos.domain.models.value_objects.EventName;
+import carlos.silva.ingressos.domain.models.value_objects.DateTimePeriod;
 import carlos.silva.ingressos.persistence.entities.EventEntity;
 import jakarta.validation.constraints.NotNull;
 
@@ -29,7 +29,7 @@ public class EventMapper {
                 new EventId(eventEntity.getId()),
                 new EventName(eventEntity.getName()),
                 eventEntity.getDescription(),
-                new EventPeriod(eventEntity.getStart(), eventEntity.getEnd()),
+                new DateTimePeriod(eventEntity.getStart(), eventEntity.getEnd()),
                 eventEntity.getMinimalAge());
     }
 }

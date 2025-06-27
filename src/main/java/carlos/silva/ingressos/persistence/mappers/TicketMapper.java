@@ -3,10 +3,10 @@ package carlos.silva.ingressos.persistence.mappers;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
-import carlos.silva.ingressos.domain.event.EventId;
-import carlos.silva.ingressos.domain.ticket.Ticket;
-import carlos.silva.ingressos.domain.ticket.TicketId;
-import carlos.silva.ingressos.domain.user.UserId;
+import carlos.silva.ingressos.domain.models.event.EventId;
+import carlos.silva.ingressos.domain.models.ticket.Ticket;
+import carlos.silva.ingressos.domain.models.ticket.TicketId;
+import carlos.silva.ingressos.domain.models.user.UserId;
 import carlos.silva.ingressos.persistence.entities.TicketEntity;
 import carlos.silva.ingressos.persistence.repositories.EventEntityRepository;
 import carlos.silva.ingressos.persistence.repositories.UserEntityRepository;

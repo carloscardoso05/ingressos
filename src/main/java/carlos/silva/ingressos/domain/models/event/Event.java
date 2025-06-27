@@ -1,16 +1,20 @@
-package carlos.silva.ingressos.domain.event;
+package carlos.silva.ingressos.domain.models.event;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.domain.AbstractAggregateRoot;
 
 import carlos.silva.ingressos.domain.DomainException;
-import carlos.silva.ingressos.domain.user.User;
-import carlos.silva.ingressos.domain.value_objects.EventName;
-import carlos.silva.ingressos.domain.value_objects.EventPeriod;
+import carlos.silva.ingressos.domain.models.user.User;
+import carlos.silva.ingressos.domain.models.value_objects.DateTimePeriod;
+import carlos.silva.ingressos.domain.models.value_objects.EventName;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -23,11 +27,14 @@ public class Event extends AbstractAggregateRoot<Event> {
     @Getter
     private String description;
     @Getter
-    private EventPeriod period;
+    private DateTimePeriod period;
     @Getter
     private Integer minimalAge;
+    @Getter
+    private final List<Session> sessions = new ArrayList<>();
 
-    public Event(EventId id, EventName name, String description, EventPeriod period, Integer minimalAge) {
+    public Event(EventId id, EventName name, String description, DateTimePeriod period, Integer minimalAge,
+            Collection<Session> sessions) {
         if (minimalAge != null && minimalAge < 0) {
             throw new DomainException("Minimal age must be positive or null");
         }
@@ -37,6 +44,8 @@ public class Event extends AbstractAggregateRoot<Event> {
         this.description = Objects.requireNonNullElse(description, "");
         this.period = checkNotNull(period);
         this.minimalAge = minimalAge;
+        checkArgument(sessions.stream().allMatch(session -> session.getEventId().equals(id)));
+        this.sessions.addAll(sessions);
     }
 
     public void changeName(EventName newName) {

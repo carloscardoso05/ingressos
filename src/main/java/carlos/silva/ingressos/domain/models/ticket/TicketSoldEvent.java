@@ -1,4 +1,4 @@
-package carlos.silva.ingressos.domain.ticket;
+package carlos.silva.ingressos.domain.models.ticket;
 
 import java.time.Instant;
 

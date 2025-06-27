@@ -1,4 +1,4 @@
-package carlos.silva.ingressos.domain.event;
+package carlos.silva.ingressos.domain.models.event;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

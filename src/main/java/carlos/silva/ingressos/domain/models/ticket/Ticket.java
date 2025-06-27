@@ -1,4 +1,4 @@
-package carlos.silva.ingressos.domain.ticket;
+package carlos.silva.ingressos.domain.models.ticket;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -7,8 +7,8 @@ import java.time.Instant;
 import org.springframework.data.domain.AbstractAggregateRoot;
 
 import carlos.silva.ingressos.domain.DomainException;
-import carlos.silva.ingressos.domain.event.EventId;
-import carlos.silva.ingressos.domain.user.UserId;
+import carlos.silva.ingressos.domain.models.event.EventId;
+import carlos.silva.ingressos.domain.models.user.UserId;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 

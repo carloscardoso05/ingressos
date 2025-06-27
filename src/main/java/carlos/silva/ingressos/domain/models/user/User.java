@@ -1,14 +1,14 @@
-package carlos.silva.ingressos.domain.user;
+package carlos.silva.ingressos.domain.models.user;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.time.LocalDate;
 import java.time.Period;
 
-import carlos.silva.ingressos.domain.event.Event;
-import carlos.silva.ingressos.domain.value_objects.BirthDate;
-import carlos.silva.ingressos.domain.value_objects.CPF;
-import carlos.silva.ingressos.domain.value_objects.PersonName;
+import carlos.silva.ingressos.domain.models.event.Event;
+import carlos.silva.ingressos.domain.models.value_objects.BirthDate;
+import carlos.silva.ingressos.domain.models.value_objects.CPF;
+import carlos.silva.ingressos.domain.models.value_objects.PersonName;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 

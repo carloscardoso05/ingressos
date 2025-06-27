@@ -1,4 +1,4 @@
-package carlos.silva.ingressos.domain.user;
+package carlos.silva.ingressos.domain.models.user;
 
 import java.util.UUID;
 
