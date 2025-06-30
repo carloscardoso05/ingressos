@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ public class EventMapperTest {
 	@Test
 	public void toDomain() {
 		EventEntity eventEntity = new EventEntity(UUID.randomUUID(), "abc", "abc", LocalDateTime.now(),
-				LocalDateTime.now(), 123);
+				LocalDateTime.now(), 123, List.of());
 
 		assertDoesNotThrow(() -> eventMapper.toDomain(eventEntity));
 		assertThrows(ConstraintViolationException.class, () -> eventMapper.fromDomain(null));

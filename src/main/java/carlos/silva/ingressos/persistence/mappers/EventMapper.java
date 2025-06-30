@@ -5,14 +5,23 @@ import org.springframework.validation.annotation.Validated;
 
 import carlos.silva.ingressos.domain.models.event.Event;
 import carlos.silva.ingressos.domain.models.event.EventId;
-import carlos.silva.ingressos.domain.models.value_objects.EventName;
+import carlos.silva.ingressos.domain.models.event.Session;
+import carlos.silva.ingressos.domain.models.event.SessionId;
 import carlos.silva.ingressos.domain.models.value_objects.DateTimePeriod;
+import carlos.silva.ingressos.domain.models.value_objects.EventName;
 import carlos.silva.ingressos.persistence.entities.EventEntity;
+import carlos.silva.ingressos.persistence.entities.SessionEntity;
+import carlos.silva.ingressos.persistence.repositories.EventEntityRepository;
+import carlos.silva.ingressos.persistence.repositories.SessionEntityRepository;
 import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
 
 @Component
 @Validated
+@RequiredArgsConstructor
 public class EventMapper {
+    private final EventEntityRepository eventEntityRepository;
+    private final SessionEntityRepository sessionEntityRepository;
 
     public EventEntity fromDomain(@NotNull Event event) {
         return new EventEntity(
@@ -21,7 +30,8 @@ public class EventMapper {
                 event.getDescription(),
                 event.getPeriod().start(),
                 event.getPeriod().end(),
-                event.getMinimalAge());
+                event.getMinimalAge(),
+                event.getSessions().stream().map(this::sesstionToEntity).toList());
     }
 
     public Event toDomain(@NotNull EventEntity eventEntity) {
@@ -30,6 +40,25 @@ public class EventMapper {
                 new EventName(eventEntity.getName()),
                 eventEntity.getDescription(),
                 new DateTimePeriod(eventEntity.getStart(), eventEntity.getEnd()),
-                eventEntity.getMinimalAge());
+                eventEntity.getMinimalAge(),
+                sessionEntityRepository.findAllByEventId(eventEntity.getId()).stream().map(this::sessionToDomain)
+                        .toList());
+    }
+
+    public Session sessionToDomain(SessionEntity entity) {
+        return new Session(
+                new SessionId(entity.getId()),
+                new EventId(entity.getId()),
+                entity.getName(),
+                new DateTimePeriod(entity.getStart(), entity.getEnd()));
+    }
+
+    public SessionEntity sesstionToEntity(Session domain) {
+        return new SessionEntity(
+                domain.getId().value(),
+                domain.getName(),
+                eventEntityRepository.findById(domain.getEventId().value()).orElseThrow(),
+                domain.getPeriod().start(),
+                domain.getPeriod().end());
     }
 }
